@@ -5,6 +5,7 @@ namespace BlackJack.Services
 {
     public class BlackJackService
     {
+
         public static ResultSet PlayGame(byte playerStandsOn)
         {
             // Get some cards together.
@@ -16,24 +17,26 @@ namespace BlackJack.Services
 
             // Game
             Hand playerHand = shoe.TakeHand();
-            Hand dealerHand = shoe.TakeHand();
+            Hand dealerHand = shoe.TakeHand();  
 
-            Card dealersShowingCard = dealerHand.Cards.First();
+            Card dealerShowingCard = dealerHand.Cards.First();
+            Card dealerHoleCard = dealerHand.Cards[1];
 
             Console.WriteLine($"Player has {playerHand}");
-            Console.WriteLine($"Dealer shows {dealersShowingCard}");
+            Console.WriteLine($"Dealer shows {dealerShowingCard}");
 
-            if (dealersShowingCard.CardType == CardType.Ace)
+            if (dealerShowingCard.CardType == CardType.Ace)
             {
                 //TODO offer insurance
             }
 
+            // TODO Rewrite or explain..
             ResultSet ret(bool playerWon, bool dealerBjOrPush)
             {
-                return new ResultSet(playerStandsOn, (byte)(dealersShowingCard.CardType + 1), ((byte)(playerHand.Cards[0].CardType + 1), (byte)(playerHand.Cards[1].CardType + 1)), playerWon, dealerBjOrPush);
+                return new ResultSet(playerStandsOn, (byte)(dealerShowingCard.CardType + 1), ((byte)(playerHand.Cards[0].CardType + 1), (byte)(playerHand.Cards[1].CardType + 1)), playerWon, dealerBjOrPush);
             }
 
-            if (dealersShowingCard.CardType == CardType.Ace || (byte)dealersShowingCard.CardType > 8)
+            if (dealerShowingCard.CardType == CardType.Ace || dealerShowingCard.CardType > CardType.Nine)
             {
                 // Dealer checks for BlackJack
                 Console.WriteLine("Dealer Checks for BlackJack...");
@@ -70,7 +73,7 @@ namespace BlackJack.Services
                 Console.WriteLine($"Player stands with a {playerHand.GetValue()}");
             }
 
-            Console.WriteLine($"Dealer reveals his hole card.  Dealer has {dealerHand}");
+            Console.WriteLine($"Dealer reveals a {dealerHoleCard}.  Dealer has {dealerHand}");
 
             // Dealer Plays
             while (dealerHand.GetValue() < 17)

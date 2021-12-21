@@ -9,8 +9,13 @@ namespace BlackJack.Service.Objects
         public override string ToString()
         {
             var str = "";
-            Cards.ForEach(x => str += x + " | ");
             str += GetValue();
+            str += " (";
+            for (var i = 0; i < Cards.Count; i++)
+            {
+                str += (i != 0 ? " | " : "") + Cards[i];
+            }
+            str += ")";
             return str;
         }
 
