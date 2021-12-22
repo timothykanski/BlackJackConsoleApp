@@ -32,11 +32,11 @@ This is a work in progress at an early stage of development.  The final product 
   - Max number of players per
 
 #### Gameplay - General
-- Shoes (multiple decks per game)
 - Multiplayer
   - vs NPCs
   - vs Humans
 - Timer
+- Cut Card
 
 #### Gameplay - Betting
 - Double Down
